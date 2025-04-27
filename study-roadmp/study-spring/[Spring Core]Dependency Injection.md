@@ -239,6 +239,235 @@ public class OrderService {
 
 ---
 
-# 핵심 요약
+## 핵심 요약
 
 > "생성자 주입은 객체 불변성을 지키고, 필수 의존성 문제를 조기에 발견할 수 있으며, 순환 참조를 빠르게 감지할 수 있기 때문에 가장 권장되는 주입 방식이다."
+
+---
+
+# 조회 빈이 2개 이상일 경우
+
+- 스프링 컨테이너에 같은 타입의 빈이 2개 이상 등록되어 있을 때
+- 타입 기준으로 주입하려 하면 스프링이 어느 빈을 주입해야 할지 몰라 에러 발생
+- 발생 에러: `NoUniqueBeanDefinitionException`
+
+---
+
+# 해결 방법
+
+## @Autowired + 필드명 매칭
+
+- 스프링은 기본적으로 타입 매칭을 시도
+- 타입이 같은 빈이 여러 개면 **필드명**으로 빈 이름과 매칭을 시도함
+
+### 예시
+
+```java
+@Component
+public class OrderService {
+
+    @Autowired
+    private DiscountPolicy rateDiscountPolicy;
+}
+```
+
+- DiscountPolicy 타입의 빈이 여러 개 있어도
+- 빈 이름이 `rateDiscountPolicy`라면 자동으로 주입된다.
+
+## 생성자주입 예시
+
+### 1. 빈 등록
+
+```java
+@Component
+public class FixedDiscountPolicy implements DiscountPolicy {
+    ...
+}
+
+@Component
+public class RateDiscountPolicy implements DiscountPolicy {
+    ...
+}
+```
+
+- DiscountPolicy 타입 빈이 2개 등록되어 있음
+- 이름은 fixedDiscountPolicy, rateDiscountPolicy
+
+---
+
+### 2. 생성자 주입 코드
+
+```java
+@Component
+public class OrderService {
+
+    private final DiscountPolicy rateDiscountPolicy;
+
+    @Autowired
+    public OrderService(DiscountPolicy rateDiscountPolicy) {
+        this.rateDiscountPolicy = rateDiscountPolicy;
+    }
+}
+```
+
+- 생성자 파라미터 이름이 rateDiscountPolicy
+- 스프링은 DiscountPolicy 타입 빈 2개를 찾고,
+- 파라미터명과 일치하는 빈(rateDiscountPolicy)을 주입한다.
+
+---
+
+## @Qualifier
+
+- 특정 이름을 명시해서 주입할 빈을 지정하는 방법
+- 필드명과 상관없이 명확하게 어떤 빈을 주입할지 지정할 수 있음
+
+### 예시
+
+```java
+@Component
+public class OrderService {
+
+    private final DiscountPolicy discountPolicy;
+
+    @Autowired
+    public OrderService(@Qualifier("rateDiscountPolicy") DiscountPolicy discountPolicy) {
+        this.discountPolicy = discountPolicy;
+    }
+}
+```
+
+- @Qualifier("빈 이름")을 통해 특정 빈을 정확히 주입할 수 있다.
+  
+---
+
+## @Primary
+
+- 같은 타입 빈이 여러 개 있을 때
+- 기본(default)으로 주입할 빈을 지정하는 방법
+- @Primary가 붙은 빈이 우선권을 가짐
+
+### 예시
+
+```java
+@Component
+@Primary
+public class RateDiscountPolicy implements DiscountPolicy {
+    ...
+}
+
+@Component
+public class FixedDiscountPolicy implements DiscountPolicy {
+    ...
+}
+```
+
+```java
+@Component
+public class OrderService {
+
+    @Autowired
+    private DiscountPolicy discountPolicy;
+}
+```
+
+- @Primary가 붙은 RateDiscountPolicy가 자동으로 주입된다.
+
+---
+
+# 요약 비교
+
+| 방법 | 설명 | 특징 |
+| --- | --- | --- |
+| @Autowired 필드명 매칭 | 타입이 같을 때 필드명으로 빈 이름 매칭 | 암묵적 이름 의존 |
+| @Qualifier | 특정 빈 이름을 명시적으로 지정 | 가장 명시적, 안전 |
+| @Primary | 기본으로 선택될 빈 지정 | 우선순위 부여, 하나만 가능 |
+
+---
+
+# 핵심 문장
+
+> 타입 충돌이 발생하면, 필드명 매칭 → @Qualifier → @Primary 순서로 주입 대상을 명확히 지정해야 한다.
+
+
+# @Qualifier와 @Primary의 우선순위
+
+## 기본 동작 정리
+
+- 스프링은 의존성 주입 시 항상 타입 기준으로 빈을 찾는다.
+- 타입이 같은 빈이 여러 개 있을 경우,
+  1. @Qualifier를 먼저 확인한다.
+  2. @Qualifier가 없으면 @Primary를 찾는다.
+  3. 둘 다 없으면 NoUniqueBeanDefinitionException이 발생한다.
+
+---
+
+## 우선순위
+
+| 순서 | 기준 | 설명 |
+| --- | --- | --- |
+| 1 | @Qualifier | 가장 우선. 명시적으로 지정한 빈을 주입 |
+| 2 | @Primary | @Qualifier가 없는 경우 기본 빈으로 주입 |
+| 3 | 타입 매칭 실패 | 둘 다 없으면 예외 발생 (NoUniqueBeanDefinitionException) |
+
+---
+
+## 코드 예시
+
+### 1. @Primary만 사용한 경우
+
+```java
+@Component
+@Primary
+public class FixedDiscountPolicy implements DiscountPolicy {
+}
+
+@Component
+public class RateDiscountPolicy implements DiscountPolicy {
+}
+```
+
+```java
+@Component
+public class OrderService {
+
+    private final DiscountPolicy discountPolicy;
+
+    @Autowired
+    public OrderService(DiscountPolicy discountPolicy) {
+        this.discountPolicy = discountPolicy;
+    }
+}
+```
+- 이 경우 `@Primary`가 붙은 `FixedDiscountPolicy`가 주입된다.
+
+---
+
+### 2. @Qualifier를 사용한 경우
+
+```java
+@Component
+public class OrderService {
+
+    private final DiscountPolicy discountPolicy;
+
+    @Autowired
+    public OrderService(@Qualifier("rateDiscountPolicy") DiscountPolicy discountPolicy) {
+        this.discountPolicy = discountPolicy;
+    }
+}
+```
+- 이 경우 `rateDiscountPolicy` 빈이 명시적으로 지정되었기 때문에
+- `@Primary`가 붙은 빈이 있어도 무시되고 `RateDiscountPolicy`가 주입된다.
+
+---
+
+## 핵심 정리
+
+- @Qualifier가 존재하면 **@Primary는 무시**된다.
+- @Qualifier가 없을 경우에만 **@Primary**가 적용된다.
+
+---
+
+## 핵심 문장
+
+> Qualifier가 있으면 무조건 Qualifier가 우선이고, 없을 때만 Primary가 적용된다.
