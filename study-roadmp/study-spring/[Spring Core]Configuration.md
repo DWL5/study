@@ -30,6 +30,15 @@ public class AppConfig {
 }
 ```
 
+### @Import
+- @Import는 명시된 여러 개의 자바 특정 클래스를 하나의 그룹으로 묶는 역할을 한다.
+```java
+@Configuration
+@Import(value = {ThreadPoolConfig.class, MailConfig.class})
+public class AutoAppConfig {
+}
+```
+
 ## 자동 구성 @ComponentScan + @Component
 
 ```java
