@@ -39,13 +39,17 @@ DNS(Domain Name System)는 사람이 읽을 수 있는 도메인 이름(예: www
 
 ## www.google.com 예시 정리
 
-- 사용자가 `www.google.com` 입력
-- 브라우저가 DNS 캐시를 확인 → 없으면 로컬 DNS 서버에 요청
-- 로컬 DNS 서버가 다음과 같이 동작
-  1. **Root 서버**에 요청: ".com"에 대한 TLD 서버 주소를 받음
-  2. **.com TLD 서버**에 요청: "google.com"에 대한 Authoritative 서버 주소를 받음
-  3. **google.com Authoritative 서버**에 요청: "www.google.com"에 대한 최종 IP 주소를 얻음 (예: 142.250.206.4)
-- 이 IP 주소를 이용해 구글 웹 서버에 접속하여 웹페이지를 불러온다.
+
+| 단계 | 설명 |
+| --- | --- |
+| 1 | 사용자가 `www.google.com` 입력 |
+| 2 | 로컬 DNS 서버가 캐시를 먼저 확인 |
+| 3 | 없으면 루트 DNS 서버에 질의 |
+| 4 | 루트 DNS 서버가 ".com" TLD 서버를 알려줌 |
+| 5 | TLD 서버가 "google.com" Authoritative 서버를 알려줌 |
+| 6 | Authoritative 서버가 "www.google.com" IP 주소를 반환 |
+| 7 | 로컬 DNS 서버가 IP를 브라우저에 전달하고 캐시에 저장 |
+| 8 | 브라우저가 해당 IP 주소로 접속하여 웹페이지를 가져옴 |
 
 ## DNS의 계층 구조
 
