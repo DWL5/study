@@ -463,11 +463,4 @@ public class OrderService {
 
 ## 핵심 정리
 
-- @Qualifier가 존재하면 **@Primary는 무시**된다.
-- @Qualifier가 없을 경우에만 **@Primary**가 적용된다.
-
----
-
-## 핵심 문장
-
 > Qualifier가 있으면 무조건 Qualifier가 우선이고, 없을 때만 Primary가 적용된다.
