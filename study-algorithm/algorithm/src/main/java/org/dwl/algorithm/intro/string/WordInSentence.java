@@ -1,7 +1,8 @@
-package org.dwl.algorithm.intro;
+package org.dwl.algorithm.intro.string;
 
 import java.util.Scanner;
 
+// 3. 문장 속 단어
 public class WordInSentence {
 
     public String solve(String str) {

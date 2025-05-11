@@ -1,7 +1,8 @@
-package org.dwl.algorithm.intro;
+package org.dwl.algorithm.intro.string;
 
 import java.util.Scanner;
 
+// 1. 문자 찾기
 public class SearchCharacter {
     public int solve(String str, char t) {
         int answer = 0;

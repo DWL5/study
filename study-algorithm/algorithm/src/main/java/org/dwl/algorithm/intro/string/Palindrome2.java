@@ -1,4 +1,4 @@
-package org.dwl.algorithm.intro;
+package org.dwl.algorithm.intro.string;
 
 import java.util.Scanner;
 

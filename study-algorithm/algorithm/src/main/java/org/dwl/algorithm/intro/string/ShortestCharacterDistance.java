@@ -1,7 +1,8 @@
-package org.dwl.algorithm.intro;
+package org.dwl.algorithm.intro.string;
 
 import java.util.Scanner;
 
+// 10. 문자거리
 public class ShortestCharacterDistance {
     // str1 : teachermode str2 : e
     public int[] solve(String str1, char c) {

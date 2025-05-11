@@ -1,9 +1,10 @@
-package org.dwl.algorithm.intro;
+package org.dwl.algorithm.intro.string;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+// 4.단어 뒤집기
 public class FlippingAWord1 {
 
     public List<String> solve(int n, String[] str) {

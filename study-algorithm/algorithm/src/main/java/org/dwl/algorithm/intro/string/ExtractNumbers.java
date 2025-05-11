@@ -1,7 +1,8 @@
-package org.dwl.algorithm.intro;
+package org.dwl.algorithm.intro.string;
 
 import java.util.Scanner;
 
+// 9.숫자만 추출
 public class ExtractNumbers {
 
     public String solve(String str) {

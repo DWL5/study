@@ -1,7 +1,8 @@
-package org.dwl.algorithm.intro;
+package org.dwl.algorithm.intro.string;
 
 import java.util.Scanner;
 
+// 2. 대소문자 변환
 public class ChangeLowerUpper {
 
     public String solve(String str) {

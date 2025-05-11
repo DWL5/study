@@ -1,7 +1,8 @@
-package org.dwl.algorithm.intro;
+package org.dwl.algorithm.intro.string;
 
 import java.util.Scanner;
 
+// 6. 중복문자 제거
 public class RemoveDuplicateCharacters {
 
     public String solve(String str) {
