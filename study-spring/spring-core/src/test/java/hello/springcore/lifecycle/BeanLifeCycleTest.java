@@ -25,5 +25,13 @@ public class BeanLifeCycleTest {
             networkClient.setUrl("http://hello-spring:dev");
             return networkClient;
         }
+
+        @Bean(initMethod = "init", destroyMethod = "close")
+        public NetworkClient2 networkClient2() {
+            System.out.println("NetworkClient Bean created.");
+            NetworkClient2 networkClient2 = new NetworkClient2();
+            networkClient2.setUrl("http://hello-spring:dev");
+            return networkClient2;
+        }
     }
 }
