@@ -1,4 +1,4 @@
-package org.dwl.algorithm.intro.twopointer;
+package org.dwl.algorithm.intro.twopointer_slidingwindow;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class MergeTwoArray {
 
     /**
-     * 두배열 합치기
+     * 두배열 합치기 - Two Pointers
      * @param n
      * @param m
      * @param a
