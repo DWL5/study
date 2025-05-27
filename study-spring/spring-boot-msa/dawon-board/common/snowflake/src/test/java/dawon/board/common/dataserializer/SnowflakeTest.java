@@ -1,4 +1,4 @@
-package dawon.board.common.snowflake;
+package dawon.board.common.dataserializer;
 
 import static org.assertj.core.api.Assertions.*;
 

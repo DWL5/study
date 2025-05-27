@@ -1,7 +1,7 @@
 package dawon.board.comment.data;
 
 import dawon.board.comment.entity.Comment;
-import dawon.board.common.snowflake.Snowflake;
+import dawon.board.common.dataserializer.Snowflake;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.Test;

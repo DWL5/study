@@ -1,6 +1,6 @@
 package dawon.board.like.service;
 
-import dawon.board.common.snowflake.Snowflake;
+import dawon.board.common.dataserializer.Snowflake;
 import dawon.board.like.entity.ArticleLike;
 import dawon.board.like.repository.ArticleLikeRepository;
 import dawon.board.like.service.response.ArticleLikeResponse;
