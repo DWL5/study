@@ -1,4 +1,4 @@
-package dawon.board.comment;
+package dawon.board.hotarticle;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
