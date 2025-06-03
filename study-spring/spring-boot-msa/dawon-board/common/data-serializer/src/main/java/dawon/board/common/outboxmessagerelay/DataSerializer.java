@@ -1,4 +1,4 @@
-package dawon.board.common.dataserializer;
+package dawon.board.common.outboxmessagerelay;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;

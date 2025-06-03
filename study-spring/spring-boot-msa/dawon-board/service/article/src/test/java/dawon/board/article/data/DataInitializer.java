@@ -1,6 +1,6 @@
 package dawon.board.article.data;
 
-import dawon.board.common.dataserializer.Snowflake;
+import dawon.board.common.outboxmessagerelay.Snowflake;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import dawon.board.article.entity.Article;

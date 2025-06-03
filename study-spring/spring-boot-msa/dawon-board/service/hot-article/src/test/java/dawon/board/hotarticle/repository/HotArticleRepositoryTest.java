@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class HotArticleRepositoryTest {
 
     @Autowired
-    HotArticleRepository hotArticleRepository;
+    HotArticleListRepository hotArticleRepository;
 
     @Test
     void addTest() throws InterruptedException {

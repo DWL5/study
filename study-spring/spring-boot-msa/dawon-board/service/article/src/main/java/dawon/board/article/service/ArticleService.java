@@ -7,7 +7,7 @@ import dawon.board.article.service.request.ArticleUpdateRequest;
 import dawon.board.article.service.response.ArticlePageResponse;
 import dawon.board.article.service.response.ArticleResponse;
 import jakarta.transaction.Transactional;
-import dawon.board.common.dataserializer.Snowflake;
+import dawon.board.common.outboxmessagerelay.Snowflake;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

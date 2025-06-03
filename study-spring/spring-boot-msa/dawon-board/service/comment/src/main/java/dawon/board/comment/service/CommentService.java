@@ -5,7 +5,7 @@ import dawon.board.comment.repository.CommentRepository;
 import dawon.board.comment.service.request.CommentCreateRequest;
 import dawon.board.comment.service.response.CommentPageResponse;
 import dawon.board.comment.service.response.CommentResponse;
-import dawon.board.common.dataserializer.Snowflake;
+import dawon.board.common.outboxmessagerelay.Snowflake;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

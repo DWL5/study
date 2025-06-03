@@ -1,4 +1,4 @@
-package dawon.board.common.dataserializer;
+package dawon.board.common.outboxmessagerelay;
 
 import static org.assertj.core.api.Assertions.*;
 

@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestClient;
 
 import java.time.LocalDateTime;
@@ -42,6 +41,6 @@ public class ArticleClient {
     public static class ArticleResponse {
         private Long articleId;
         private String title;
-        private LocalDateTime createAt;
+        private LocalDateTime createdAt;
     }
 }

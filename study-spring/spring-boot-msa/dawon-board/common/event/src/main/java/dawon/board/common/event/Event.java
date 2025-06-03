@@ -1,8 +1,7 @@
 package dawon.board.common.event;
 
-import dawon.board.common.dataserializer.DataSerializer;
+import dawon.board.common.outboxmessagerelay.DataSerializer;
 import lombok.Getter;
-import org.w3c.dom.CDATASection;
 
 @Getter
 public class Event<T extends EventPayload> {

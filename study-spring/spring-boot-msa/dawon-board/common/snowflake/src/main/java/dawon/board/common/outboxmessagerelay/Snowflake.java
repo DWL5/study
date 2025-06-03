@@ -1,4 +1,4 @@
-package dawon.board.common.dataserializer;
+package dawon.board.common.outboxmessagerelay;
 
 import java.util.random.RandomGenerator;
 
