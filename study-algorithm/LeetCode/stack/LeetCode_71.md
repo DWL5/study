@@ -1,3 +1,5 @@
+### 나의 풀이
+- /로 Split하지 않고 문자열 그대로 스택에 쌓음 -> 처리해야하는 조건이 너무 많아짐
 ```
 import java.util.*;
 
@@ -66,6 +68,29 @@ class Solution {
         }
         String result = sb.toString();
         return result;
+    }
+}
+```
+
+### 모범 답안
+- Split하여 처리
+```
+class Solution {
+    public String simplifyPath(String path) {
+        Stack<String> stack = new Stack<>();
+        String[] parts = path.split("/");
+
+        for (String part : parts) {
+            if (part.equals("") || part.equals(".")) {
+                continue; // 무시
+            } else if (part.equals("..")) {
+                if (!stack.isEmpty()) stack.pop();
+            } else {
+                stack.push(part);  // 디렉토리 이름
+            }
+        }
+
+        return "/" + String.join("/", stack);
     }
 }
 ```
